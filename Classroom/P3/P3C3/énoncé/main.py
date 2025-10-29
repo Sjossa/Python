@@ -1,6 +1,14 @@
-# Écrivez votre code ici !
+import csv
+
+with open ('/Python/Classroom/P3/P3C3/énoncé/input.csv') as fichier_csv:
+  reader = csv.DictReader(fichier_csv, delimiter=',')
+  for ligne in reader:
+    print(f"{ligne['nom']} travaille {ligne['heures_travaillees']}")
 
 
-# Ne touchez pas le code ci-dessous
-if __name__ == "__main__":
-    main()
+fichier = open("/Python/Classroom/P3/P3C3/énoncé/output.csv", "w")
+fichier.write("Hello, world!")
+fichier.close()
+
+# if __name__ == "__main__":
+#     main()
