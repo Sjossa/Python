@@ -1,6 +1,3 @@
-from taille import *
-
-
 class Coffe:
     def __init__(self, name: str, prix: int):
         self.name = name

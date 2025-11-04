@@ -1,5 +1,6 @@
-from taille import *
-from Boisson import *
+from taille import tailleL, tailleM, tailleS
+from Boisson import Cafe, ChocolaChaud, The, Mocha
+from Topping import Caramel, CoulisChocolat, Mocha2
 
 taille_mapping = {"S": tailleS("S"), "M": tailleM("M"), "L": tailleL("L")}
 
@@ -33,6 +34,21 @@ class User:
             print("Boisson invalide !")
             return None
 
+    def choisir_topping(self):
+        choix_utilisateur = input(
+            "Choisissez votre topping entre : caramel, Coulis_Chocolat, mocha,Chantily\n"
+        ).lower()
+        return ToppingFactory.choix(choix_utilisateur)
 
-# user = User()
-# boisson = user.choisir_boisson()
+
+class ToppingFactory:
+    @staticmethod
+    def choix(type):
+        if type == "caramel":
+            return Caramel()
+        elif type == "coulis chocolat":
+            return CoulisChocolat()
+        elif type == "mocha":
+            return Mocha2()
+        # elif type == "chantilly":
+        #     return Chantilly()
