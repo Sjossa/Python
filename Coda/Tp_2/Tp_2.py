@@ -2,31 +2,76 @@ class Voiture:
     def __init__(self, nom, prix):
         self.nom = nom
         self.prix = prix
-        self.abs = 0
-        self.boite_automatique = 0
-        self.toi_ouvrant = 0
+        self.option = []
 
-    def options(self):
-        print("Choisissez vos options :")
-        choix_abs = input("ABS (oui/non) : ").lower()
-        if choix_abs == "oui":
-            self.abs = 3000
-
-        choix_boite = input("Boîte automatique (oui/non) : ").lower()
-        if choix_boite == "oui":
-            self.boite_automatique = 10000
-
-        choix_toit = input("Toit ouvrant (oui/non) : ").lower()
-        if choix_toit == "oui":
-            self.toi_ouvrant = (self.prix * 0.1) + 5000
+    def ajout(self, option):
+        self.option.append(option)
 
     def prix_total(self):
-        return self.prix + self.abs + self.boite_automatique + self.toi_ouvrant
+        prix_total = self.prix
+        for opt in self.option:
+            prix_total += opt.get_prix(self.prix)
+        return prix_total
 
 
-choix_voiture = input("veuillez choisir votre voiture")
-choix_prix = input("veuillez indiquer son pris de depart")
+class Option:
+    def __init__(self, nom: str):
+        self.nom = nom
 
-ma_voiture = Voiture(choix_voiture, choix_prix)
-ma_voiture.options()
-print(f"Prix total : {ma_voiture.prix_total()} €")
+    def get_nom(self) -> str:
+        return self.nom
+
+    def get_prix(self, prix_base) -> float:
+        return 0.0
+
+
+class ABS(Option):
+    def __init__(self):
+        super().__init__("ABS")
+
+    def get_prix(self, prix_base: float) -> float:
+        return 3000.0
+
+
+class BoiteAuto(Option):
+    def __init__(self):
+        super().__init__("Boîte automatique")
+
+    def get_prix(self, prix_base: float) -> float:
+        return prix_base * 0.10
+
+
+class ToitOuvrant(Option):
+    def __init__(self):
+        super().__init__("Toit ouvrant")
+
+    def get_prix(self, prix_base: float) -> float:
+        return (prix_base * 0.10) + 5000
+
+
+option = [ToitOuvrant, ABS, BoiteAuto]
+
+
+class utulisateur:
+    def __init__(self):
+
+        nom_voiture = input("veuillez ecrire le nom de votre voiture\n")
+        prix_voiture = input("maintenant sont prix \n")
+        prix_voiture = float(prix_voiture)
+
+        self.voiture = Voiture(nom_voiture, prix_voiture)
+
+        choix = input("voulez-vous des option ? (oui/non)\n")
+        i = 0
+        if choix.lower() == "oui":
+            while i < len(option):
+                nom_option = option[i]().get_nom()
+                reponse = input(f"Voulez-vous {nom_option} ? (oui/non\n) ")
+                if reponse.lower() == "oui":
+                    self.voiture.ajout(option[i]())
+
+                i += 1
+        print(f"Prix total : {self.voiture.prix_total()} €")
+
+
+utulisateur()
