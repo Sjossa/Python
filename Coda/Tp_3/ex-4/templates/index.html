@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Traducteur Anglais - Français</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      padding: 36px;
+      background: #fff;
+      color: #111;
+    }
+
+    .container {
+      max-width: 560px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px 0;
+      font-weight: bold;
+    }
+
+    ul.form-list {
+      list-style: disc;
+      padding-left: 40px;
+      margin: 8px 0 0 0;
+    }
+
+    .form-row {
+      margin: 6px 0 10px 0;
+    }
+
+    label {
+      margin-right: 8px;
+    }
+
+    input[type="text"] {
+      width: 260px;
+      padding: 4px 6px;
+      font-size: 14px;
+    }
+
+    select {
+      padding: 4px 6px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 5px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* zone résultat (optionnel) */
+    #result {
+      margin-top: 12px;
+      font-style: italic;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Traducteur Anglais - Français</h1>
+
+    <form id="translator" action="{{ url_for('traitement')}}" method="Post">
+      <ul class="form-list">
+        <li class="form-row">
+          <label for="word">Mot&nbsp;:</label>
+          <input id="word" name="word" type="text" placeholder="Entrez un mot" required>
+        </li>
+
+        <li class="form-row">
+          <label for="direction">Traduction&nbsp;:</label>
+          <select id="direction" name="direction">
+            <option value="fr-en" name="fr-en">Français vers Anglais</option>
+            <option value="en-fr">Anglais vers Français</option>
+          </select>
+        </li>
+
+        <li class="form-row">
+          <button type="submit">Traduire</button>
+        </li>
+      </ul>
+    </form>
+
+
+    <div id="result" aria-live="polite"></div>
+  </div>
+
+  <!-- <script>
+
+    document.getElementById('translator').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const word = document.getElementById('word').value.trim();
+      const dir = document.getElementById('direction').value;
+      if (!word) {
+        document.getElementById('result').textContent = "Veuillez entrer un mot.";
+        return;
+      }
+      // Demo : affiche ce qu'on enverrait. Remplace par appel réel.
+      document.getElementById('result').textContent =
+        `Envoi : mot="${word}", direction="${dir}" — ici tu appelleras ton API/serveur pour traduire.`;
+    });
+  </script> -->
+</body>
+</html>
