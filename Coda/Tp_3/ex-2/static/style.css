@@ -1,0 +1,27 @@
+
+ html {
+  font-family: sans-serif;
+  background: #e20505;
+  padding: 1rem;
+}
+body {
+  max-width: 960px;
+  margin: 0 auto;
+  background: white;
+}
+
+.image {
+    background-image: url(./image/a.jpg);
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}
